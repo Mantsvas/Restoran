@@ -29,6 +29,12 @@ Route::get('/dishes/{dish}/edit','DishController@edit')->name('editDish.page')->
 Route::put('/dishes/{dish}/update','DishController@update')->name('updateDish.page')->middleware('admin');
 Route::delete('/dishes/{dish}','DishController@destroy')->name('deleteDish.page')->middleware('admin');
 
+Route::get('/cart','CartController@index')->name('cart.page');
+Route::post('/addToCart','CartController@addToCart')->name('addToCart');
+Route::post('/removeFromCart','CartController@removeFromCart')->name('removeFromCart');
+Route::post('/removeDishFromCart','CartController@removeDishFromCart')->name('removeWholeDishFromCart');
+Route::get('/cart/clean','CartController@cleanCart')->name('cleanCart');
+
 
 
 Route::group(['middleware'=>['admin'],'prefix'=>'admin'],function()
@@ -47,13 +53,10 @@ Route::group(['middleware'=>['admin'],'prefix'=>'admin'],function()
 
 
   Route::get('/users','UserController@index')->name('adminUsers.page');
-
   Route::get('/users/create','UserController@create')->name('adminUserCreate.page');
   Route::post('/users','UserController@store')->name('adminUserStore.page');
-
   Route::get('/users/{user}/edit','UserController@edit')->name('adminUserEdit.page');
   Route::put('/users/{user}','UserController@update')->name('adminUserUpdate.page');
-
   Route::delete('/users/{user}','UserController@destroy')->name('deleteUser.page');
 
 });

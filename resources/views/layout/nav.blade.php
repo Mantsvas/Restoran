@@ -13,12 +13,12 @@
 
 
         @endif
-        <li class="nav-item"><a href="{{route('dishes.page')}}" class="nav-link">Dishes</a></li>
-        <li class="nav-item"><a href="#section-offer" class="nav-link">Offer</a></li>
-        <li class="nav-item"><a href="#section-menu" class="nav-link">Menu</a></li>
-        <li class="nav-item"><a href="#section-news" class="nav-link">News</a></li>
-        <li class="nav-item"><a href="#section-gallery" class="nav-link">Gallery</a></li>
-        <li class="nav-item"><a href="#section-contact" class="nav-link">Contact</a></li>
+          <li class="nav-item"><a href="{{route('dishes.page')}}" class="nav-link">Dishes</a></li>
+          <li class="nav-item"><a href="{{route('cart.page')}}" class="nav-link"><i class="fas fa-shopping-cart"></i>  {{Session::has('cart') ? session('cart')->totalQuantity : 0}}</a></li>
+          <li class="nav-item"><a href="#section-menu" class="nav-link">Menu</a></li>
+          <li class="nav-item"><a href="#section-news" class="nav-link">News</a></li>
+          <li class="nav-item"><a href="#section-gallery" class="nav-link">Gallery</a></li>
+          <li class="nav-item"><a href="#section-contact" class="nav-link">Contact</a></li>
 
             @guest
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>

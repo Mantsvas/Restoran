@@ -2,27 +2,35 @@
 
 @section('content')
 
-<table class="table table-striped table-dark">
+
 
 
     <div class="row">
 
       @foreach($dishes as $dish)
-        <div class="col-6 col-md-4">
+        <div class="col-6 col-md-4 col-lg-3">
 
-          <div class="card" style="width: 18rem;">
+          <div class="card mx-auto mt-5" style="width: 16.3rem;">
             <img class="card-img-top" src="{{$dish->photourl}}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{$dish->name}}</h5>
               <p class="card-text">{{$dish->description}}</p>
-              <div class="row">
+              <div class="row justify-content-md-center">
+                <button class="btn btn-warning" type="button" name="button">
+                <a href="{{route('dish.page',$dish->id)}}" >More Detais</a>
+                </button>
+              </div>
+              <div class="row justify-content-md-center">
 
-                <button class="btn btn-success col-6" type="button" name="price">{{$dish->price}}</button>
-                <a href="{{route('dish.page',$dish->id)}}" class="btn btn-primary col-6">More Detais</a>
+                <form  action="{{route('addToCart')}}" method="post">
+                  @csrf
+                  <input type="hidden" name="id" value="{{$dish->id}}">
+                  <button class="btn btn-success " type="submit">Price: {{$dish->price}} To Cart </button>
+                </form>
               </div>
 
               @if(Auth::user() && Auth::user()->role === 'admin')
-                <form action="{{route('deleteDish.page',$dish->id)}}" method="post">
+                <form class="justify-content-md-between" action="{{route('deleteDish.page',$dish->id)}}" method="post">
                   @csrf
                   @method('Delete')
                   <a class="btn btn-success" href="{{route('adminDishEdit.page',$dish->id)}}">Edit</a>
@@ -35,8 +43,14 @@
         </div>
       @endforeach
     </div>
-  </tbody>
-</table>
+    <div class="row justify-content-md-center mt-5">
+      <p>
+        {{ $dishes->links() }}
+      </p>
+    </div>
+
+
+
 
 
 

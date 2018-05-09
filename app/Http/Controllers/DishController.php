@@ -8,6 +8,7 @@ use App\Main;
 use App\Http\Requests\StoreDishRequest;
 use Illuminate\Http\Request;
 
+
 class DishController extends Controller
 {
     /**
@@ -17,14 +18,14 @@ class DishController extends Controller
      */
     public function index()
     {
-      $dishes = Dish::all();
+      $dishes = Dish::paginate(12);
       return view('dishes.dishList', compact('dishes'));
     }
 
     public function adminIndex()
     {
       $dishes = Dish::all();
-      
+
 
       return view('admin.dishList', compact('dishes','mains'));
     }
