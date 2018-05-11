@@ -37,6 +37,8 @@ Route::get('/reservation/{reservation}','ReservationController@edit')->name('edi
 Route::put('/reservation','ReservationController@update')->name('updateReservation');
 
 
+Route::get('/checkout','OrderController@checkout')->name('checkout')->middleware('auth');
+
 
 
 Route::group(['middleware'=>['admin'],'prefix'=>'admin'],function()
