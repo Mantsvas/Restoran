@@ -26,8 +26,10 @@
       <td class="row"><form class="col-6" action="{{route('addToCart')}}" method="post">
         @csrf
         <input type="hidden" name="id" value="{{$dish['item']['id']}}">
+        <input type="hidden" name="from" value="from">
         <button class="btn btn-success float-right" type="submit">+</button>
-      </form><form class="col-6" action="{{route('removeFromCart')}}" method="post">
+      </form>
+      <form class="col-6" action="{{route('removeFromCart')}}" method="post">
         @csrf
         <input type="hidden" name="id" value="{{$dish['item']['id']}}">
         <button class="btn btn-warning float-left" type="submit">-</button>

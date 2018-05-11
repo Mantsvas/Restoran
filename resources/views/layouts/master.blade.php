@@ -137,6 +137,7 @@ desired effect
                 <li><a href="{{route('adminUsers.page')}}"><i class="fa fa-link"></i> <span>Users</span></a></li>
                 <li><a href="{{route('adminCategories.page')}}"><i class="fa fa-link"></i> <span>Categories</span></a></li>
                 <li><a href="{{route('adminDishes.page')}}"><i class="fa fa-link"></i> <span>Dishes</span></a></li>
+                <li><a href="{{route('adminReservation.page')}}"><i class="fa fa-link"></i> <span>Reservations</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
                         <span class="pull-right-container">

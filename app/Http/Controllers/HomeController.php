@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Main;
+use App\Dish;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $mains = Main::all();
+        $dishes = Dish::all();
+
+        return view('welcome',compact('mains','dishes'));
     }
 }

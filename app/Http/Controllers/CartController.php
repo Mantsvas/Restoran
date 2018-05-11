@@ -12,13 +12,17 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
       $id = $request->input('id');
+      $from = $request->input('from');
       $dish = Dish::findOrFail($id);
       $oldCart = (Session::has('cart'))? Session::get('cart'): null;
       $cart = New Cart($oldCart);
 
       $cart->addToCart($dish);
       $request->session()->put('cart',$cart);
-      return redirect()->back()->with('success','Dish Added to Cart');
+      if(isset($from)){
+        return redirect()->back()->with('success','Dish Added to Cart');
+      }
+      return response()->json($cart);
     }
 
     public function index()
@@ -52,7 +56,7 @@ class CartController extends Controller
     }
     public function cleanCart(Request $request)
     {
-      $request->session()->flush();
+      $request->session()->forget('cart');
       return redirect()->back()->with('success','Cart is Clean');
 
 

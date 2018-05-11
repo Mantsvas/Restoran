@@ -192,79 +192,42 @@
         <div class="col-md-12 text-center">
 
           <ul class="nav ftco-tab-nav nav-pills mb-5" id="pills-tab" role="tablist">
-            <li class="nav-item ftco-animate">
-              <a class="nav-link active" id="pills-breakfast-tab" data-toggle="pill" href="#pills-breakfast" role="tab" aria-controls="pills-breakfast" aria-selected="true">Breakfast</a>
-            </li>
-            <li class="nav-item ftco-animate">
-              <a class="nav-link" id="pills-lunch-tab" data-toggle="pill" href="#pills-lunch" role="tab" aria-controls="pills-lunch" aria-selected="false">Lunch</a>
-            </li>
-            <li class="nav-item ftco-animate">
-              <a class="nav-link" id="pills-dinner-tab" data-toggle="pill" href="#pills-dinner" role="tab" aria-controls="pills-dinner" aria-selected="false">Dinner</a>
-            </li>
-          </ul>
+            @foreach($mains as $main)
+              <li class="nav-item ftco-animate">
+                <a class="nav-link" id="pills-{{$main->title}}-tab" data-toggle="pill" href="#{{$main->title}}" role="tab" aria-controls="pills-{{$main->title}}" aria-selected="true">{{$main->title}}</a>
+              </li>
+            @endforeach
+
 
           <div class="tab-content text-left">
-            <div class="tab-pane fade show active" id="pills-breakfast" role="tabpanel" aria-labelledby="pills-breakfast-tab">
-              <div class="row">
-                <div class="col-md-6 ftco-animate">
-                  <div class="media menu-item">
-                    <img class="mr-3" src="images/menu_1.jpg" class="img-fluid" alt="Free Template by Free-Template.co">
-                    <div class="media-body">
-                      <h5 class="mt-0">Salted Fried Chicken</h5>
-                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <h6 class="text-primary menu-price">$35.50</h6>
-                    </div>
+            @foreach($mains as $main)
+              <div class="tab-pane fade show active" id="{{$main->title}}" role="tabpanel" aria-labelledby="pills-{{$main->title}}-tab">
+                <div class="row">
+                  <div class="col-md-6 ftco-animate">
+                    @foreach($dishes as $dish)
+                      @if($dish->main_id === $main->id)
+                        <div class="media menu-item">
+                          <img class="mr-3" src="{{$dish->photourl}}" class="img-fluid" alt="Free Template by Free-Template.co">
+                          <div class="media-body">
+                            <h5 class="mt-0">{{$dish->name}}</h5>
+                            <p>{{$dish->description}}</p>
+                            <h6 class="text-primary menu-price">{{$dish->price}}</h6>
+                            <h6 class="text-primary menu-price">{{$dish->main_id}}</h6>
+                          </div>
+                        </div>
+                      @endif
+                    @endforeach
+
                   </div>
 
-                  <div class="media menu-item">
-                    <img class="mr-3" src="images/menu_2.jpg" class="img-fluid" alt="Free Template by Free-Template.co">
-                    <div class="media-body">
-                      <h5 class="mt-0">Italian Sauce Mushroom</h5>
-                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <h6 class="text-primary menu-price">$24.50</h6>
-                    </div>
-                  </div>
-
-                  <div class="media menu-item">
-                    <img class="mr-3" src="images/menu_3.jpg" class="img-fluid" alt="Free Template by Free-Template.co">
-                    <div class="media-body">
-                      <h5 class="mt-0">Fried Potato w/ Garlic</h5>
-                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <h6 class="text-primary menu-price">$14.50</h6>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="col-md-6 ftco-animate">
-                  <div class="media menu-item">
-                    <img class="mr-3" src="images/menu_2.jpg" class="img-fluid" alt="Free Template by Free-Template.co">
-                    <div class="media-body">
-                      <h5 class="mt-0">Italian Sauce Mushroom</h5>
-                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <h6 class="text-primary menu-price">$35.50</h6>
-                    </div>
-                  </div>
-
-                  <div class="media menu-item">
-                    <img class="mr-3" src="images/menu_1.jpg" class="img-fluid" alt="Free Template by Free-Template.co">
-                    <div class="media-body">
-                      <h5 class="mt-0">Salted Fried Chicken</h5>
-                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <h6 class="text-primary menu-price">$12.50</h6>
-                    </div>
-                  </div>
-
-                  <div class="media menu-item">
-                    <img class="mr-3" src="images/menu_3.jpg" class="img-fluid" alt="Free Template by Free-Template.co">
-                    <div class="media-body">
-                      <h5 class="mt-0">Fried Potato w/ Garlic</h5>
-                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <h6 class="text-primary menu-price">$18.50</h6>
-                    </div>
-                  </div>
                 </div>
               </div>
-            </div>
+            @endforeach
+
+
+
+
+
             <div class="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="pills-lunch-tab">
               <div class="row">
                 <div class="col-md-6 ftco-animate">
@@ -544,3 +507,4 @@
 
 
 @endsection
+@include('layout.reservationModal')

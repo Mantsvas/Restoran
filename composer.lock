@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "85740b7c8f667e3850d3e9dbfbcf9c8b",
-    "content-hash": "2bd7134632ce300f82381d703143fb25",
+    "hash": "109b61af299dba5406dc78300834cd7e",
+    "content-hash": "a52826e8e29603e005aa1b5667a07e46",
     "packages": [
         {
             "name": "colinodell/json5",

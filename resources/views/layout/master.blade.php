@@ -13,7 +13,6 @@
     @yield('content')
 
     @include('layout.footer')
-    @include('layout.reservationModal')
     @include('layout.script')
   </body>
 </html>

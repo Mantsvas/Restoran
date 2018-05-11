@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+
+use Countries;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -41,6 +43,11 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+        public function showRegistrationForm()
+    {
+        $countries = Countries::where('extra.eu_member', 'True');
+        return view('auth.register', compact('countries'));
+    }
     /**
      * Get a validator for an incoming registration request.
      *

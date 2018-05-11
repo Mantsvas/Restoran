@@ -22,6 +22,9 @@
               </div>
               <div class="row justify-content-md-center">
 
+                <button class="cart btn btn-success btn-product"  data-id="{{$dish->id}}" type="button" name="button">Add To cart</button>
+                <a href="#"  data-idd="{{$dish->id}}" class="cart btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Add 2 Cart</a>
+
                 <form  action="{{route('addToCart')}}" method="post">
                   @csrf
                   <input type="hidden" name="id" value="{{$dish->id}}">
@@ -48,6 +51,44 @@
         {{ $dishes->links() }}
       </p>
     </div>
+
+
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+     <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            $('button.cart').click(function () {
+
+                var dish_id = $(this).data('id');
+                var url = "/addToCart";
+                console.log(dish_id);
+
+                $.ajax({
+                    type:'Post',
+                    url: url,
+                    data:{id:dish_id},
+                    dataType:'json',
+                    success: function (data) {
+                        console.log(data);
+                        $('#cartQuantity').html('<i class="fas fa-shopping-cart"></i>' + data.totalQuantity);
+                    },
+                    error: function (data){
+                        console.log('Error:', data);
+                    }
+
+                });
+            });
+        });
+    </script>
 
 
 

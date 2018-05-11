@@ -186,11 +186,15 @@
                             <div class="col-md-6">
                               @if(isset($user))
                                 <select id='country' class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" value="{{ $user->country }}" name="country">
-                                  <option value="Lithuania">lithuania</option>
+                                  @foreach($countries as $country)
+                                    <option value="{{$country->name->common}}">{{$country->name->common}}</option>
+                                  @endforeach
                                 </select>
                               @else
                                 <select id='country' class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" value="{{ old('country') }}" name="country">
-                                  <option value="Lithuania">lithuania</option>
+                                  @foreach($countries as $country)
+                                    <option value="{{$country->name->common}}">{{$country->name->common}}</option>
+                                  @endforeach
                                 </select>
                               @endif
 

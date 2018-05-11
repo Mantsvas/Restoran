@@ -156,15 +156,17 @@
 
                             <div class="col-md-6">
                                 <select id='country' class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" value="{{ old('country') }}" name="country">
-                                  <option value="Lithuania">lithuania</option>
+                                  @foreach($countries as $country)
+                                    <option value="{{$country->name->common}}">{{$country->name->common}}</option>
+                                  @endforeach
                                 </select>
 
 
 
                                 @if ($errors->has('
-                                Country'))
+                                country'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('Country') }}</strong>
+                                        <strong>{{ $errors->first('country') }}</strong>
                                     </span>
                                 @endif
                             </div>

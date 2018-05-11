@@ -11,11 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('ho');
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/', 'HomeController@index')->name('ho');
+// Route::get('/rregister','UserController@register')->name('rregister');
 Auth::routes();
 
 
@@ -34,6 +31,11 @@ Route::post('/addToCart','CartController@addToCart')->name('addToCart');
 Route::post('/removeFromCart','CartController@removeFromCart')->name('removeFromCart');
 Route::post('/removeDishFromCart','CartController@removeDishFromCart')->name('removeWholeDishFromCart');
 Route::get('/cart/clean','CartController@cleanCart')->name('cleanCart');
+
+Route::post('/reservation','ReservationController@store')->name('storeReservation');
+Route::get('/reservation/{reservation}','ReservationController@edit')->name('editReservation');
+Route::put('/reservation','ReservationController@update')->name('updateReservation');
+
 
 
 
@@ -58,5 +60,12 @@ Route::group(['middleware'=>['admin'],'prefix'=>'admin'],function()
   Route::get('/users/{user}/edit','UserController@edit')->name('adminUserEdit.page');
   Route::put('/users/{user}','UserController@update')->name('adminUserUpdate.page');
   Route::delete('/users/{user}','UserController@destroy')->name('deleteUser.page');
+
+  Route::get('/reservation','ReservationController@index')->name('adminReservation.page');
+  Route::get('/reservation/create','ReservationController@create')->name('createReservation.page');
+  Route::post('/reservation','ReservationController@store')->name('storeReservation.page');
+  Route::get('/reservation/{reservation}/edit','ReservationController@edit')->name('editReservation.page');
+  Route::put('/reservation/{reservation}','ReservationController@update')->name('updateReservation.page');
+  Route::delete('/reservation/{reservation}','ReservationController@destroy')->name('deleteReservation.page');
 
 });

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Validator;
+use Countries;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +19,7 @@ class UserController extends Controller
     public function index()
     {
       $users = User::all();
+
       return view('admin.users.usersList', compact('users'));
     }
 
@@ -26,7 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.userForm');
+        $countries = Countries::where('extra.eu_member', 'True');
+        return view('admin.users.userForm',compact('countries'));
     }
 
     /**
@@ -35,7 +40,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $data)
+    public function store(StoreUserRequest $data)
     {
       User::create([
           'name' => $data['name'],
@@ -73,7 +78,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.userForm',compact('user'));
+        $countries = Countries::where('extra.eu_member', 'True');
+        return view('admin.users.userForm',compact('user','countries'));
     }
 
     /**
@@ -83,7 +89,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $update, User $user)
+    public function update(StoreUserRequest $update, User $user)
     {
       $user->update([
         'name' =>$update->input('name'),
@@ -117,4 +123,22 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('adminUsers.page')->with('success','User Deleted');
     }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'surname'=>'required|string|max:255',
+            'dateOfBirth'=>'required|date',
+            'phoneNumber'=>'required|string',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'adress'=>'required|string',
+            'city'=>'required|string',
+            'zipCode'=>'required|string',
+            'country'=>'required|string',
+
+        ]);
+    }
+
 }

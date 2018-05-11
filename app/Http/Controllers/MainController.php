@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Main;
+use App\Http\Requests\StoreMainRequest;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -34,7 +35,7 @@ class MainController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMainRequest $request)
     {
       Main::create([
         'title' =>$request->input('title')
@@ -71,7 +72,7 @@ class MainController extends Controller
      * @param  \App\Main  $main
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $update, Main $category)
+    public function update(StoreMainRequest $update, Main $category)
     {
       $category->update([
         'title' =>$update->input('title'),
